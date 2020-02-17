@@ -37,8 +37,9 @@ class Core:
             elif result.__class__ == h5py._hl.dataset.Dataset:
                 print(result.name)
 
-    def add_files(self, globs, compression=None):
-        with h5py.File(self.hdf5, "a") as root:
+    def write(self, globs, compression=None, append=False):
+        mode = "a" if append else "w"
+        with h5py.File(self.hdf5, mode) as root:
             for glob_string in globs:
                 img_paths = glob.glob(glob_string, recursive=True)
                 for i, path in enumerate(img_paths):
