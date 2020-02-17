@@ -6,7 +6,7 @@
 show hdf5 file in image file.
 
 
-## Examples
+## h5cv command
 
 #### list keys
 
@@ -31,6 +31,28 @@ $ h5cv -H test.h5 show /some_group/test.jpg.np
 ```bash
 $ h5cv -H test.h5 [--store [numpy|binary]] write -g 'images/*.jpg'
 ```
+
+## custom generator
+
+```
+from h5cv.core import Core
+from PIL import Image
+
+
+class MyGenerator:
+    def __init__(self):
+        pass
+
+    def __call__(self, path):
+        print(f"custom generate {path}")
+        return Image.open(path)
+
+Core(
+    hdf5="test.h5",
+    generator=MyGenerator()
+).write("evaluation/*.jpg")
+```
+
 
 ## Installation
 
