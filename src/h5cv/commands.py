@@ -46,7 +46,7 @@ def ls(ctx, key):
 
 @cli.command(help="write")
 @click.option(
-    "--globs", "-g", type=str, multiple=True, help="files.",
+    "--glob", "-g", type=str, help="files.",
 )
 @click.option(
     "--compression", type=str, help="compression",
@@ -55,8 +55,8 @@ def ls(ctx, key):
     "--append/--no-append", "-v", default=False, help="append mode. (default: False)"
 )
 @click.pass_context
-def write(ctx, globs, compression, append):
-    ctx.obj.core.write(globs, compression, append)
+def write(ctx, glob, compression, append):
+    ctx.obj.core.write(glob, compression, append)
 
 
 @cli.command(help="imgcat in hdf5 dataset.")
