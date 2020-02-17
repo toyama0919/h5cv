@@ -36,20 +36,22 @@ $ h5cv -H test.h5 [--store [numpy|binary]] write -g 'images/*.jpg'
 
 ```
 from h5cv.core import Core
+from h5cv.generator import Generator
 from PIL import Image
 
 
-class MyGenerator:
-    def __init__(self):
-        pass
-
-    def __call__(self, path):
+class MyGenerator(Generator):
+    def __getitem__(self, path):
         print(f"custom generate {path}")
         return Image.open(path)
 
 Core(
     hdf5="test.h5"
-).write("evaluation/*.jpg", generator=MyGenerator())
+).write(
+    "evaluation/*.jpg",
+    generator=MyGenerator(),
+    compression="gzip"
+)
 ```
 
 

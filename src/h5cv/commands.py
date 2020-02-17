@@ -56,7 +56,7 @@ def ls(ctx, key):
 )
 @click.pass_context
 def write(ctx, glob, compression, append):
-    ctx.obj.core.write(glob, compression, append)
+    ctx.obj.core.write(glob, append, compression=compression)
 
 
 @cli.command(help="imgcat in hdf5 dataset.")
