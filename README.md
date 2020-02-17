@@ -27,6 +27,18 @@ $ h5cv -H test.h5 imgcat /some_group/test.jpg.np
 $ h5cv -H test.h5 show /some_group/test.jpg.np
 ```
 
+#### imgcat in hdf5.
+
+```bash
+$ h5cv -H test.h5 show /some_group/test.jpg.np
+```
+
+#### write in hdf5.
+
+```bash
+$ h5cv -H test.h5 write -g 'images/*.jpg'
+```
+
 ## Installation
 
 ```sh
