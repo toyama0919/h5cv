@@ -11,8 +11,7 @@ show hdf5 file in image file.
 #### list keys
 
 ```bash
-$ h5cv -H test.h5 ls /
-
+$ h5cv -H test.h5 ls [images]
 ```
 
 #### show dataset in hdf5.
@@ -30,7 +29,7 @@ $ h5cv -H test.h5 show /some_group/test.jpg.np
 #### write in hdf5.
 
 ```bash
-$ h5cv -H test.h5 write -g 'images/*.jpg'
+$ h5cv -H test.h5 [--store [numpy|binary]] write -g 'images/*.jpg'
 ```
 
 ## Installation
