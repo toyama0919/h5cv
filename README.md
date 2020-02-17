@@ -3,38 +3,28 @@
 [![PyPI version](https://badge.fury.io/py/h5cv.svg)](https://badge.fury.io/py/h5cv)
 [![Build Status](https://secure.travis-ci.org/toyama0919/h5cv.png?branch=master)](http://travis-ci.org/toyama0919/h5cv)
 
-Command Line utility for Amazon Aurora.
+show hdf5 file in image file.
 
-Support python3 only. (use boto3)
-
-## Settings
-
-```sh
-export AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXXXX
-export AWS_SECRET_ACCESS_KEY=XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-export AWS_DEFAULT_REGION=xx-xxxxxxx-x
-```
-
-* support environment variables and iam role.
 
 ## Examples
 
-#### list instance and cluster
+#### list keys
 
 ```bash
-$ h5cv list
+$ h5cv -H test.h5 ls /
 
-[instances]
-db01 mysql available db.m3.xlarge  ap-northeast-1c None
-db02 mysql available db.m3.xlarge  ap-northeast-1c None
-db03 mysql available db.m3.large ap-northeast-1c None
-db04 mysql available db.m3.large ap-northeast-1c None
-db05 aurora available db.t2.medium  ap-northeast-1c aurora-cluster
-db06 aurora available db.t2.medium  ap-northeast-1c aurora-cluster
+```
 
-[clusters]
-aurora-cluster available aurora  ['db05', 'db06']
-...
+#### imgcat in hdf5.
+
+```bash
+$ h5cv -H test.h5 imgcat /some_group/test.jpg.np
+```
+
+#### show dataset in hdf5.
+
+```bash
+$ h5cv -H test.h5 show /some_group/test.jpg.np
 ```
 
 ## Installation
