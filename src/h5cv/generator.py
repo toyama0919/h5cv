@@ -1,5 +1,4 @@
 import numpy
-from PIL import Image
 
 
 class Generator:
@@ -13,8 +12,6 @@ class Generator:
             return self._binary(path, self.settings)
         elif self.store == "numpy":
             return self._numpy(path, self.settings)
-        elif self.store == "pillow":
-            return self._pillow(path, self.settings)
 
     def _binary(self, path, settings):
         with open(path, "rb") as f:
@@ -24,8 +21,4 @@ class Generator:
     def _numpy(self, path, settings):
         with open(path, "rb") as f:
             data = numpy.fromstring(f.read(), dtype="uint8")
-        return data
-
-    def _pillow(self, path, settings):
-        data = numpy.asarray(Image.open(path))
         return data

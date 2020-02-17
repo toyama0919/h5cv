@@ -17,12 +17,10 @@ def read_version():
 
 
 install_requires = [
-    "opencv-python",
     "h5py",
     "click",
     "PyYAML",
     "imgcat",
-    "Pillow",
 ]
 extras_require = {"test": ["tox", "twine", "wheel"]}
 
