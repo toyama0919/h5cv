@@ -1,4 +1,4 @@
-from h5cv.util import Util
+from h5cv.core import Core
 
 
 class TestUtil(object):
