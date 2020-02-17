@@ -15,12 +15,6 @@ $ h5cv -H test.h5 ls /
 
 ```
 
-#### imgcat in hdf5.
-
-```bash
-$ h5cv -H test.h5 imgcat /some_group/test.jpg.np
-```
-
 #### show dataset in hdf5.
 
 ```bash
@@ -43,4 +37,10 @@ $ h5cv -H test.h5 write -g 'images/*.jpg'
 
 ```sh
 pip install h5cv
+```
+
+### Installation from github
+
+```sh
+pip install git+https://github.com/toyama0919/h5cv
 ```
