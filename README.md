@@ -48,9 +48,8 @@ class MyGenerator:
         return Image.open(path)
 
 Core(
-    hdf5="test.h5",
-    generator=MyGenerator()
-).write("evaluation/*.jpg")
+    hdf5="test.h5"
+).write("evaluation/*.jpg", generator=MyGenerator())
 ```
 
 

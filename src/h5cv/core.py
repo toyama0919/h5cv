@@ -10,19 +10,12 @@ from . import constants
 
 class Core:
     def __init__(
-        self,
-        config=None,
-        profile=None,
-        hdf5=None,
-        store=None,
-        generator=None,
-        debug=None,
+        self, config=None, profile=None, hdf5=None, store=None, debug=None,
     ):
         profile = self._read_profile(config, profile)
         self.hdf5 = hdf5 or profile.get("hdf5")
         self.store = store or profile.get("store") or constants.DEFAULT_STORE
         self.logger = get_logger(debug)
-        self.generator = generator or Generator(store=self.store)
 
     def list(self, key):
         with h5py.File(self.hdf5, "r") as root:
@@ -36,7 +29,8 @@ class Core:
             elif result.__class__ == h5py._hl.dataset.Dataset:
                 print(result.name)
 
-    def write(self, glob_string, compression=None, append=False):
+    def write(self, glob_string, compression=None, append=False, generator=None):
+        generator = generator or Generator(store=self.store)
         mode = "a" if append else "w"
         with h5py.File(self.hdf5, mode) as root:
             img_paths = glob.glob(glob_string, recursive=True)
@@ -45,7 +39,7 @@ class Core:
                     if root.get(path):
                         self.logger.debug(f"already exist => {path}")
                     else:
-                        data = self.generator(path)
+                        data = generator(path)
                         self.logger.debug(f"data => {data}")
                         root.create_dataset(path, data=data, compression=compression)
 
