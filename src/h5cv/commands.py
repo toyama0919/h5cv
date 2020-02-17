@@ -25,11 +25,7 @@ class Mash(object):
 def cli(ctx, config, profile, hdf5, store, debug, version):
     ctx.obj = Mash()
     ctx.obj.core = Core(
-        hdf5=hdf5,
-        store=store,
-        config=config,
-        profile=profile,
-        debug=debug
+        hdf5=hdf5, store=store, config=config, profile=profile, debug=debug
     )
 
     if version:

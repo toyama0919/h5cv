@@ -1,9 +1,7 @@
 import os
 import yaml
 import h5py
-import numpy
 import glob
-import cv2
 from imgcat import imgcat
 from .logger import get_logger
 from .generator import Generator
@@ -11,14 +9,7 @@ from . import constants
 
 
 class Core:
-    def __init__(
-        self,
-        config=None,
-        profile=None,
-        hdf5=None,
-        store=None,
-        debug=None
-    ):
+    def __init__(self, config=None, profile=None, hdf5=None, store=None, debug=None):
         profile = self._read_profile(config, profile)
         self.hdf5 = hdf5 or profile.get("hdf5")
         self.store = store or profile.get("store") or constants.DEFAULT_STORE
@@ -49,7 +40,9 @@ class Core:
                         else:
                             data = self.generator(path)
                             self.logger.debug(f"data => {data}")
-                            root.create_dataset(path, data=data, compression=compression)
+                            root.create_dataset(
+                                path, data=data, compression=compression
+                            )
 
     def imgcat(self, key):
         with h5py.File(self.hdf5, "r") as root:

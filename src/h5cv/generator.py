@@ -22,7 +22,7 @@ class Generator:
         return data
 
     def _numpy(self, path, settings):
-        with open(path, 'rb') as f:
+        with open(path, "rb") as f:
             data = numpy.fromstring(f.read(), dtype="uint8")
         return data
 
