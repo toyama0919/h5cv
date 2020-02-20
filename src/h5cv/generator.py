@@ -25,6 +25,6 @@ class Generator:
             if self.store == "binary":
                 data = numpy.void(f.read())
             elif self.store == "numpy":
-                data = numpy.fromstring(f.read(), dtype="uint8")
+                data = numpy.frombuffer(f.read(), dtype="uint8")
         self.logger.debug(f"data => {data}")
         return data
