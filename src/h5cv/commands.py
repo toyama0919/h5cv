@@ -54,7 +54,7 @@ def ls(ctx, recursive, key):
     "--compression", type=str, help="compression",
 )
 @click.option(
-    "--append/--no-append", "-v", default=False, help="append mode. (default: False)"
+    "--append/--no-append", "-a", default=False, help="append mode. (default: False)"
 )
 @click.pass_context
 def write(ctx, glob, compression, append):
