@@ -11,7 +11,7 @@ show hdf5 file in image file.
 #### list keys
 
 ```bash
-$ h5cv -H test.h5 ls [images]
+$ h5cv -H test.h5 ls [-r] [key]
 ```
 
 #### show dataset in hdf5.
@@ -23,13 +23,13 @@ $ h5cv -H test.h5 show /some_group/test.jpg.np
 #### imgcat in hdf5.
 
 ```bash
-$ h5cv -H test.h5 show /some_group/test.jpg.np
+$ h5cv -H test.h5 imgcat /some_group/test.jpg
 ```
 
 #### write in hdf5.
 
 ```bash
-$ h5cv -H test.h5 [--store [numpy|binary]] write -g 'images/*.jpg'
+$ h5cv -H test.h5 [--store [numpy|binary]] write -g 'images/*.jpg' [--compression gzip] [--append]
 ```
 
 ## custom generator
