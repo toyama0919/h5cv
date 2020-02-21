@@ -18,15 +18,18 @@ class Core:
         self.debug = debug
         self.logger = get_logger(debug)
 
-    def list(self, key):
+    def list(self, key, recursive=False):
         with h5py.File(self.hdf5, "r") as root:
             result = root.get(key) if key else root
             if (
                 result.__class__ == h5py._hl.group.Group
                 or result.__class__ == h5py._hl.files.File
             ):
-                for key in result.keys():
-                    print(key)
+                if recursive:
+                    result.visit(self._print_all)
+                else:
+                    for key in result.keys():
+                        print(key)
             elif result.__class__ == h5py._hl.dataset.Dataset:
                 print(result.name)
 
@@ -57,3 +60,6 @@ class Core:
         else:
             profile = {}
         return profile
+
+    def _print_all(self, name):
+        print(name)

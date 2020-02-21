@@ -37,10 +37,13 @@ def cli(ctx, config, profile, hdf5, store, debug, version):
 
 
 @cli.command(help="list hdf5 keys")
+@click.option(
+    "--recursive/--no-recursive", "-r", default=False, help="recursive files. (default: False)"
+)
 @click.argument("key", required=False)
 @click.pass_context
-def ls(ctx, key):
-    ctx.obj.core.list(key)
+def ls(ctx, recursive, key):
+    ctx.obj.core.list(key, recursive)
 
 
 @cli.command(help="write")
