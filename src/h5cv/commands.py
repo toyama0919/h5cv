@@ -37,10 +37,9 @@ def cli(ctx, config, profile, hdf5, store, debug, version):
 
 
 @cli.command(help="list hdf5 keys")
-@click.argument("key", nargs=-1)
+@click.argument("key", required=False)
 @click.pass_context
 def ls(ctx, key):
-    key = None if len(key) == 0 else key[0]
     ctx.obj.core.list(key)
 
 
