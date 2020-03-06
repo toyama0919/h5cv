@@ -50,6 +50,10 @@ class Core:
             dataset = root[key][()]
             print(dataset)
 
+    def delete(self, key):
+        with h5py.File(self.hdf5, "a") as root:
+            del root[key]
+
     def _read_profile(self, config, profile_name):
         config = config or constants.DEFAULT_CONFIG
         profile_name = profile_name or constants.DEFAULT_PROFILE

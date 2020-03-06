@@ -32,6 +32,12 @@ $ h5cv -H test.h5 imgcat /some_group/test.jpg
 $ h5cv -H test.h5 [--store [numpy|binary]] write -g 'images/*.jpg' [--compression gzip] [--append]
 ```
 
+#### delete dataset or group in hdf5.
+
+```bash
+$ h5cv -H test.h5 delete /some_group/test.jpg
+```
+
 ## custom generator
 
 ```

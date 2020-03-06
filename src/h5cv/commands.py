@@ -38,7 +38,10 @@ def cli(ctx, config, profile, hdf5, store, debug, version):
 
 @cli.command(help="list hdf5 keys")
 @click.option(
-    "--recursive/--no-recursive", "-r", default=False, help="recursive files. (default: False)"
+    "--recursive/--no-recursive",
+    "-r",
+    default=False,
+    help="recursive files. (default: False)",
 )
 @click.argument("key", required=False)
 @click.pass_context
@@ -73,6 +76,13 @@ def imgcat(ctx, key):
 @click.pass_context
 def show(ctx, key):
     ctx.obj.core.show(key)
+
+
+@cli.command(help="delete in hdf5 dataset")
+@click.argument("key")
+@click.pass_context
+def delete(ctx, key):
+    ctx.obj.core.delete(key)
 
 
 def main():
