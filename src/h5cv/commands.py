@@ -59,9 +59,12 @@ def ls(ctx, recursive, key):
 @click.option(
     "--append/--no-append", "-a", default=False, help="append mode. (default: False)"
 )
+@click.option(
+    "--output-group", "-o", type=str, help="dest static output group.",
+)
 @click.pass_context
-def write(ctx, glob, compression, append):
-    ctx.obj.core.write(glob, append, compression=compression)
+def write(ctx, glob, compression, append, output_group):
+    ctx.obj.core.write(glob, append, compression=compression, output_group=output_group)
 
 
 @cli.command(help="imgcat in hdf5 dataset.")

@@ -10,17 +10,22 @@ class Generator:
 
     def __call__(self, root, paths, settings={}):
         compression = settings.get("compression")
+        output_group = settings.get("output_group")
         self.logger.info(f"compression => {compression}")
         for i, path in enumerate(paths):
-            if os.path.isfile(path):
-                if root.get(path):
-                    self.logger.debug(f"already exist => {path}")
-                else:
-                    data = self.__getitem__(path)
-                    root.create_dataset(path, data=data, compression=compression)
+            if not os.path.isfile(path):
+                continue
+            dataset_path = self._get_dataset_path(output_group, path)
+            if root.get(dataset_path):
+                self.logger.info(f"already exist => {dataset_path}")
+            else:
+                self.logger.info(
+                    f"generate {self.store}: {path} => {root.filename}:{dataset_path}"
+                )
+                data = self.__getitem__(path)
+                root.create_dataset(dataset_path, data=data, compression=compression)
 
     def __getitem__(self, path):
-        self.logger.info(f"generate {self.store} => {path}")
         with open(path, "rb") as f:
             if self.store == "binary":
                 data = numpy.void(f.read())
@@ -28,3 +33,9 @@ class Generator:
                 data = numpy.frombuffer(f.read(), dtype="uint8")
         self.logger.debug(f"data => {data}")
         return data
+
+    def _get_dataset_path(self, output_group, path):
+        if output_group is None:
+            return path
+        basename = os.path.basename(path)
+        return os.path.join(output_group, basename)
