@@ -75,5 +75,12 @@ def show(ctx, key):
     ctx.obj.core.show(key)
 
 
+@cli.command(help="delete in hdf5 dataset")
+@click.argument("key")
+@click.pass_context
+def delete(ctx, key):
+    ctx.obj.core.delete(key)
+
+
 def main():
     cli(obj={})
