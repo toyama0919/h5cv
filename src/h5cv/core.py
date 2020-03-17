@@ -21,10 +21,7 @@ class Core:
     def list(self, key, recursive=False):
         with h5py.File(self.hdf5, "r") as root:
             result = root.get(key) if key else root
-            if (
-                result.__class__ == h5py._hl.group.Group
-                or result.__class__ == h5py._hl.files.File
-            ):
+            if result.__class__ == h5py._hl.group.Group or result.__class__ == h5py._hl.files.File:
                 if recursive:
                     result.visit(self._print_all)
                 else:
@@ -58,7 +55,7 @@ class Core:
         config = config or constants.DEFAULT_CONFIG
         profile_name = profile_name or constants.DEFAULT_PROFILE
         if config and os.path.exists(config):
-            profile = yaml.load(open(config, encoding="UTF-8").read()).get(profile_name)
+            profile = yaml.safe_load(open(config, encoding="UTF-8").read()).get(profile_name)
             if profile is None:
                 profile = {}
         else:
